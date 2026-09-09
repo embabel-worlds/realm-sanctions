@@ -1,0 +1,18 @@
+name: realm-sanctions
+description: |
+  Screen the parties you already track — CRM accounts, counterparties, suppliers,
+  donors — against the consolidated sanctions lists. The one counterparty check
+  with legal teeth, and the one this world did not have.
+
+  The authoritative lists (OFAC SDN and the wider consolidated set) are published
+  as open bulk data, keyless. This realm holds the SCREEN RESULT: for each party,
+  whether an exact or official-alias match exists on the list, and if so which
+  programme and country. It is deliberately honest about its matching: exact and
+  known-alias only, not fuzzy or transliteration — a clear result means "no exact
+  or alias hit", never "cleared by a compliance officer". Fuzzy/PEP screening is a
+  key away (OpenSanctions /match); this is the keyless first pass.
+version: 0.1.0
+author: rod
+tags: [sanctions, compliance, risk, counterparty, ofac]
+exports:
+  - ScreenResult

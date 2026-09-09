@@ -1,0 +1,21 @@
+# One STORED type. The screen runs against the live OFAC SDN bulk (72k entities,
+# keyless) offline; each party's result is written here as a row. `party` is the
+# name screened and the identity — one current result per party.
+- name: ScreenResult
+  description: "The sanctions-screening result for one party the world tracks. `status` is `hit` if the party's name exactly matches a name or official alias on the list, else `clear`. A `clear` is the absence of an exact/alias match — NOT a fuzzy or human clearance. When `hit`, the matched name, programme and country are the list's own."
+  properties:
+    party:
+      description: "The party screened, as this world names it. Identity."
+      metadata:
+        identity: "true"
+    role: "What the party is to us — CRM customer, supplier, control, etc."
+    status: "`hit` (exact or alias match on the list) or `clear` (no such match)."
+    matchedName: "For a hit, the list entry matched — may be an alias of the party."
+    matchedVia: "`name` or `alias` — how the match was made."
+    listName: "The source list, e.g. `OFAC SDN`."
+    program: "For a hit, the sanctions programme(s), e.g. `US-UKRRUS-REL`."
+    country: "For a hit, the list's country code(s) for the entity."
+    schemaType: "The list entity's kind — Organization, Person, Vessel, etc."
+    sourceUrl: "The list's own source URL for the entry, where present."
+    screenedOn: "Date the screen was run against the list (ISO)."
+    listSize: "How many list entities were screened against, for provenance."

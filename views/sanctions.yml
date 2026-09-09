@@ -1,0 +1,26 @@
+# The answer surface. Hits first — a screen is read for its exceptions.
+- name: SanctionsScreen
+  description: Every tracked party with its sanctions-screen result, hits first. A clear row means no exact or official-alias match on the list — not a human clearance.
+  params:
+    limit: {type: int, default: 100, description: "How many parties to return."}
+  cypher: |
+    MATCH (s:ScreenResult)
+    RETURN s.party AS party, s.role AS role, s.status AS status,
+           s.matchedName AS matchedName, s.matchedVia AS matchedVia,
+           s.program AS program, s.country AS country, s.schemaType AS kind,
+           s.listName AS list, s.screenedOn AS screenedOn
+    ORDER BY CASE s.status WHEN 'hit' THEN 0 ELSE 1 END, party
+    LIMIT $limit
+
+- name: SanctionsHits
+  description: Only the parties that matched a sanctions-list name or alias — the exceptions to act on.
+  params:
+    limit: {type: int, default: 100, description: "How many hits to return."}
+  cypher: |
+    MATCH (s:ScreenResult)
+    WHERE s.status = 'hit'
+    RETURN s.party AS party, s.role AS role, s.matchedName AS matchedName,
+           s.matchedVia AS matchedVia, s.program AS program, s.country AS country,
+           s.schemaType AS kind, s.sourceUrl AS source
+    ORDER BY party
+    LIMIT $limit
