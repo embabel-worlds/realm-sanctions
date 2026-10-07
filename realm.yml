@@ -13,6 +13,7 @@ description: |
   key away (OpenSanctions /match); this is the keyless first pass.
 version: 0.1.0
 author: rod
+category: compliance
 tags: [sanctions, compliance, risk, counterparty, ofac]
 exports:
   - ScreenResult
